@@ -2,6 +2,10 @@ defaults: &defaults
   working_directory: ~/code
   docker:
     - image: circleci/android:api-26-alpha
+  environment:
+    TERM: dumb
+    TEST_FLAGS: "--configure-on-demand -PdisablePreDex"
+    _JAVA_OPTIONS: "-Xmx3200m -XX:ParallelGCThreads=2 -XX:ConcGCThreads=2 -XX:ParallelGCThreads=2 -Djava.util.concurrent.ForkJoinPool.common.parallelism=2"
 
 version: 2
 jobs:
