@@ -1,36 +1,26 @@
-defaults: &defaults
-  working_directory: ~/code
-  docker:
-    - image: circleci/android:api-26-alpha
+machine:
   environment:
+    ENV: ci
+    GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx2048m -XX:+HeapDumpOnOutOfMemoryError"'
     TERM: dumb
     TEST_FLAGS: "--configure-on-demand -PdisablePreDex"
     _JAVA_OPTIONS: "-Xmx3200m -XX:ParallelGCThreads=2 -XX:ConcGCThreads=2 -XX:ParallelGCThreads=2 -Djava.util.concurrent.ForkJoinPool.common.parallelism=2"
+  java:
+    version: openjdk8
 
-version: 2
-jobs:
-  build:
-    <<: *defaults
-    steps:
-      - checkout
-      - restore_cache:
-          key: gradle-{{ checksum "build.gradle" }}
-      - run:
-          name: Android SDK Licenses
-          command: ci/android_sdk_licenses.sh
-      - run:
-          name: Dependencies
-          command: ./gradlew --no-daemon --stacktrace dependencies
-      - run:
-          name: Unit Tests
-          command: ./gradlew -q app:jacocoTestDebugUnitTestReport $TEST_FLAGS
-      - store_test_results:
-          path: "app/build/test-results/testDebugUnitTest"
-      - run:
-          name: Send coverage reports to CodeCov
-          command: bash <(curl -s https://codecov.io/bash)
-      - save_cache:
-          key: gradle-{{ checksum "build.gradle" }}
-          paths:
-            - ~/.gradle
+checkout:
+  post:
+    - git submodule sync
+    - git submodule update --init
 
+dependencies:
+  pre:
+    - mkdir -p $ANDROID_HOME/licenses
+    - cp ${HOME}/${CIRCLE_PROJECT_REPONAME}/licenses/* $ANDROID_HOME/licenses/
+    - echo y | android update sdk --no-ui --all --filter "tools,android-26,build-tools-26.0.2,platform-tools,extra-android-m2repository,extra-google-m2repository,extra-google-google_play_services"
+test:
+  override:
+    - ./gradlew -q app:jacocoTestDebugUnitTestReport $TEST_FLAGS
+  post:
+    - cp -r app/build/test-results/testDebugUnitTest $CIRCLE_TEST_REPORTS || true
+    - bash <(curl -s https://codecov.io/bash)
