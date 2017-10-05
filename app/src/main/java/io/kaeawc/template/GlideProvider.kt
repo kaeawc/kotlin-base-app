@@ -12,21 +12,16 @@ import com.bumptech.glide.load.model.GlideUrl
 import com.bumptech.glide.module.AppGlideModule
 import okhttp3.OkHttpClient
 import java.io.InputStream
-import sun.text.normalizer.UTF16.append
-
-
 
 @GlideModule
 class GlideProvider : AppGlideModule() {
 
-    fun registerComponents(context: Context, glide: Glide, registry: Registry) {
-        registry.append(GlideUrl::class.java, InputStream::class.java, FlickrModelLoader.Factory())
+    override fun registerComponents(context: Context, glide: Glide, registry: Registry) {
+        // no-op
     }
 
     // Disable manifest parsing to avoid adding similar modules twice.
-    override fun isManifestParsingEnabled(): Boolean {
-        return false
-    }
+    override fun isManifestParsingEnabled(): Boolean = false
 
     override fun applyOptions(context: Context, builder: GlideBuilder) {
         builder.setMemoryCache(LruResourceCache(5 * 1024 * 1024)).setDecodeFormat(
