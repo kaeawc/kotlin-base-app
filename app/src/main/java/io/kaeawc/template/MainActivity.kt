@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onPause() {
         super.onPause()
-        if (::disposable.isInitialized && !disposable.isDisposed) disposable.dispose()
+        if (!disposable.isDisposed) disposable.dispose()
     }
 
     fun onImagesLoaded(images: List<Image>) {
