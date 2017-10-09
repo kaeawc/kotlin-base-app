@@ -42,6 +42,7 @@ ext.deps = [
     appCompat: "com.android.support:appcompat-v7:$supportLibraryVersion",
     design: "com.android.support:design:$supportLibraryVersion",
     cardview: "com.android.support:cardview-v7:$supportLibraryVersion",
+    recyclerview: "com.android.support:recyclerview-v7:$supportLibraryVersion",
     constraintLayout: "com.android.support.constraint:constraint-layout:$constraintLayoutVersion",
     customTabs: "com.android.support:customtabs:$supportLibraryVersion",
     billing: "com.android.billingclient:billing:dp-1",
