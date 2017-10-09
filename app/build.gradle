@@ -46,6 +46,10 @@ dependencies {
 
     implementation deps.timber
 
+    // HTTP
+    implementation deps.okhttp
+    implementation deps.moshi
+
     testImplementation deps.junit
     testImplementation deps.kotlin
     testImplementation deps.kotlinReflect
@@ -57,5 +61,9 @@ dependencies {
 }
 
 configurations.all {
-   resolutionStrategy.failOnVersionConflict()
+    resolutionStrategy {
+        force 'com.squareup.okhttp3:okhttp:3.8.0', deps.okhttp
+        force 'com.squareup.okio:okio:1.11.0', 'com.squareup.okio:okio:1.13.0'
+        failOnVersionConflict()
+    }
 }
