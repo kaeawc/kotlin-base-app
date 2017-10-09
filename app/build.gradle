@@ -6,10 +6,6 @@ android {
     compileSdkVersion 26
     buildToolsVersion "$build_tools_version"
 
-    dexOptions {
-        maxProcessCount 4
-    }
-
     defaultConfig {
         applicationId "io.kaeawc.template"
         minSdkVersion 16
@@ -43,27 +39,6 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
-    }
-
-    testOptions {
-        unitTests.returnDefaultValues = true
-        unitTests.all {
-            // All the usual Gradle options.
-            jvmArgs '-noverify'
-            testLogging {
-                events "passed", "skipped", "failed", "standardOut", "standardError"
-                outputs.upToDateWhen {false}
-                showStandardStreams = true
-            }
-        }
-    }
-
-    lintOptions {
-        abortOnError true
-        checkReleaseBuilds false
-        absolutePaths false
-        checkAllWarnings true
-        warning 'InvalidPackage'
     }
 
     flavorDimensions "env"
