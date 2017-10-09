@@ -19,11 +19,6 @@ android {
         debug {
             debuggable true
             minifyEnabled false
-            testCoverageEnabled false
-        }
-        ci {
-            debuggable true
-            minifyEnabled false
             testCoverageEnabled true
         }
         release {
@@ -39,17 +34,6 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
-    }
-
-    flavorDimensions "env"
-
-    productFlavors {
-        internal {
-            dimension "env"
-        }
-        production {
-            dimension "env"
-        }
     }
 }
 
