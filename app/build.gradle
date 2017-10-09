@@ -54,3 +54,7 @@ dependencies {
         exclude group: 'org.jetbrains.kotlin', module: 'kotlin-reflect'
     }
 }
+
+configurations.all {
+   resolutionStrategy.failOnVersionConflict()
+}
