@@ -15,7 +15,7 @@ class ImageViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
         }
     }
 
-    fun onBind(image: Image) {
+    fun onBind(image: String) {
 
     }
 }

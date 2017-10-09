@@ -8,9 +8,6 @@ import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
 
-    @Inject lateinit var db: Database
-
-    var presenter: MainPresenter? = null
     lateinit var disposable: CompositeDisposable
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,23 +19,10 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         if (!disposable.isDisposed) disposable.dispose()
-        presenter?.let {
-            disposable.add(it.getImages().subscribe(
-                    { photos -> onImagesLoaded(photos) },
-                    { error -> onFailedToLoadImages(error) }))
-        }
     }
 
     override fun onPause() {
         super.onPause()
         if (!disposable.isDisposed) disposable.dispose()
-    }
-
-    fun onImagesLoaded(images: List<Image>) {
-
-    }
-
-    fun onFailedToLoadImages(error: Throwable) {
-        Timber.e(error, "Could not load images correctly")
     }
 }
