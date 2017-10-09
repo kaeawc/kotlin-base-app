@@ -43,12 +43,19 @@ dependencies {
     implementation deps.appCompat
     implementation deps.recyclerview
     implementation deps.constraintLayout
+    implementation deps.customTabs
 
     implementation deps.timber
 
     // HTTP
     implementation deps.okhttp
     implementation deps.moshi
+
+    // Date parsing
+    implementation deps.threeTen
+
+    // Network connectivity sampling
+    implementation deps.connectionclass
 
     testImplementation deps.junit
     testImplementation deps.kotlin
