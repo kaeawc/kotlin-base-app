@@ -50,7 +50,7 @@ project.afterEvaluate {
                         "src/$buildTypeName/kotlin"
                 ]
                 sourceDirectories = files('src/main/kotlin/')
-                executionData = files(["$buildDir/jacoco/testCiUnitTest.exec"])
+                executionData = files(["${buildDir}/jacoco/${testTaskName}.exec"])
                 reports {
                     xml.enabled = true
                     html.enabled = true
