@@ -23,7 +23,7 @@ jobs:
           command: ./gradlew --no-daemon --stacktrace dependencies
       - run:
           name: Unit Tests
-          command: ./gradlew -q app:createDebugCoverageReport $TEST_FLAGS
+          command: ./gradlew -q app:testInternalCiUnitTestCoverage $TEST_FLAGS
       - store_test_results:
           path: "app/build/test-results/testDebugUnitTest"
       - run:

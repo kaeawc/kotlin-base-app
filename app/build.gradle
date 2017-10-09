@@ -23,6 +23,11 @@ android {
         debug {
             debuggable true
             minifyEnabled false
+            testCoverageEnabled false
+        }
+        ci {
+            debuggable true
+            minifyEnabled false
             testCoverageEnabled true
         }
         release {
