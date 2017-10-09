@@ -57,6 +57,10 @@ dependencies {
     // Network connectivity sampling
     implementation deps.connectionclass
 
+    // RxJava & RxAndroid
+    implementation deps.rxJava
+    implementation deps.rxAndroid
+
     testImplementation deps.junit
     testImplementation deps.kotlin
     testImplementation deps.kotlinReflect
@@ -69,6 +73,7 @@ dependencies {
 
 configurations.all {
     resolutionStrategy {
+        force 'io.reactivex.rxjava2:rxjava:2.0.1', deps.rxJava
         force 'com.squareup.okhttp3:okhttp:3.8.0', deps.okhttp
         force 'com.squareup.okio:okio:1.11.0', 'com.squareup.okio:okio:1.13.0'
         failOnVersionConflict()
