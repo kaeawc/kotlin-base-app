@@ -38,7 +38,6 @@ android {
 dependencies {
 
     implementation deps.kotlin
-    implementation deps.kotlinReflect
 
     implementation deps.appCompat
     implementation deps.recyclerview
