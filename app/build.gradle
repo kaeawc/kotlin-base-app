@@ -46,7 +46,7 @@ dependencies {
 
     implementation deps.timber
 
-    testImplementation "junit:junit:4.12"
+    testImplementation deps.junit
     testImplementation deps.kotlin
     testImplementation deps.kotlinReflect
     testImplementation(mockitoForKotlin) {
