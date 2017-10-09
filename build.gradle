@@ -114,6 +114,7 @@ ext.deps = [
 
     // Test dependencies
     junit: 'junit:junit:4.12',
+    junitPlatform: "org.junit.platform:junit-platform-runner:1.0.1",
     mockitoForKotlin: "com.nhaarman:mockito-kotlin:1.5.0",
     robolectric: "org.robolectric:robolectric:3.4.2",
 
