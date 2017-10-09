@@ -5,18 +5,29 @@ buildscript {
     repositories {
         jcenter()
         google()
+        // Uncomment to use Kotlin EAP builds
+        // maven { url "https://dl.bintray.com/kotlin/kotlin-eap-1.2" }
+        maven { url 'https://maven.fabric.io/public' }
+        maven { url "https://raw.githubusercontent.com/layerhq/releases-android/master/releases/" }
     }
     dependencies {
         classpath "org.jacoco:org.jacoco.core:0.7.9"
-        classpath "com.android.tools.build:gradle:3.0.0-beta7"
+        classpath 'com.android.tools.build:gradle:3.0.0-beta7'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.kotlin:kotlin-android-extensions:$kotlin_version"
+        // classpath 'com.google.gms:google-services:3.1.0'
+        // classpath 'io.fabric.tools:gradle:1.23.0'
     }
 }
 
 allprojects {
     repositories {
-        google()
         jcenter()
+        google()
+        // Uncomment to use Kotlin EAP builds
+        // maven { url "https://dl.bintray.com/kotlin/kotlin-eap-1.2" }
+        maven { url "https://jitpack.io" }
+        maven { url 'https://maven.fabric.io/public' }
     }
 }
 
@@ -130,4 +141,23 @@ ext.deps = [
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        url "http://repository.jetbrains.com/all"
+    }
+}
+
+project.ext.preDexLibs = !project.hasProperty('disablePreDex')
+
+subprojects {
+    project.plugins.whenPluginAdded { plugin ->
+        if ("com.android.build.gradle.AppPlugin".equals(plugin.class.name)) {
+            project.android.dexOptions.preDexLibraries = rootProject.ext.preDexLibs
+        } else if ("com.android.build.gradle.LibraryPlugin".equals(plugin.class.name)) {
+            project.android.dexOptions.preDexLibraries = rootProject.ext.preDexLibs
+        }
+    }
 }
