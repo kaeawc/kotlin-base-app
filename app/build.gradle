@@ -37,32 +37,36 @@ android {
 
 dependencies {
 
+    // Kotlin
     implementation deps.kotlin
 
+    // Android
     implementation deps.appCompat
     implementation deps.recyclerview
     implementation deps.constraintLayout
     implementation deps.customTabs
 
-    implementation deps.timber
-
     // HTTP
     implementation deps.okhttp
     implementation deps.moshi
-
-    // Date parsing
-    implementation deps.threeTen
-
-    // Network connectivity sampling
-    implementation deps.connectionclass
 
     // RxJava & RxAndroid
     implementation deps.rxJava
     implementation deps.rxAndroid
 
+    // Network connectivity sampling
+    implementation deps.connectionclass
+
     // Dagger 2
     implementation deps.dagger
 
+    // Logging
+    implementation deps.timber
+
+    // Date parsing
+    implementation deps.threeTen
+
+    // Tests
     testImplementation deps.junit
     testImplementation deps.kotlin
     testImplementation deps.kotlinReflect
